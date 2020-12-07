@@ -1,0 +1,280 @@
+''' Beej Lecture on number conversion
+    https://www.youtube.com/watch?v=umwSs9fNegY&feature=emb_logo '''
+
+
+# ------------------------------------------------------------------- #
+#                         Binary to Decimal                           #
+# ------------------------------------------------------------------- #
+
+Binary keeps track of the numerical places
+
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+01010110
+
+Example 1
+01010110
+0 = 0 * 128 ---> 0 
+1 = 1 * 64  ---> 64
+0 = 0 * 32  ---> 0
+1 = 1 * 16  ---> 16
+0 = 0 * 8   ---> 0
+1 = 1 * 4   ---> 4
+1 = 1 * 2   ---> 2
+0 = 0 * 1   ---> 0
+
+Add the last column together
+0 + 64 + 0 + 16 + 0 + 4 + 2 + 0 = 86 Decimal or 01010110 Binary
+
+Example 2
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+00001111
+
+00001111
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+1 = 1 * 8   ---> 8
+1 = 1 * 4   ---> 4
+1 = 1 * 2   ---> 2
+1 = 1 * 1   ---> 1
+
+Add the last column together
+0 + 0 + 0 + 0 + 8 + 4 + 2 + 1 = 15 Decimal or 00001111 Binary
+
+
+# ------------------------------------------------------------------- #
+#                          Decimal to Binary                          #
+# ------------------------------------------------------------------- #
+
+Example 1
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+67 
+
+Take the largest/closest numerical place that matches to the decimal number.
+For example 1: We have 67, looking at the Binary places, we can use 64th place +
+the 2nd place and the 1s place to add up to 67
+
+67
+0 = 0 * 128 ---> 0
+1 = 1 * 64  ---> 64
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+0 = 0 * 8   ---> 0
+0 = 0 * 4   ---> 0
+1 = 1 * 2   ---> 2
+1 = 1 * 1   ---> 1
+
+Instead of adding up the last column, we now combine the first column
+01000011 Binary or 67 Decimal
+
+Example 2
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+33
+
+33
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+1 = 1 * 32  ---> 32
+0 = 0 * 16  ---> 0
+0 = 0 * 8   ---> 0
+0 = 0 * 4   ---> 0
+0 = 0 * 2   ---> 0
+1 = 1 * 1   ---> 1
+
+Instead of adding up the last column, we now combine the first column
+00100001 Binary or 33 Decimal
+
+# ------------------------------------------------------------------- #
+#                          Binary to Hexadecimal                      #
+# ------------------------------------------------------------------- #
+
+1 byte is 8 bits long: 10100011
+A nibble is 4 bits long: 1010 0011 ( this is 1010011 split in half)
+
+Start by looking at the RIGHT nibble: 0011
+Convert that to decimal - start at 1s place
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+00000011 <---- mind the zero padding
+
+00000011
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+0 = 0 * 8   ---> 0
+0 = 0 * 4   ---> 0
+0 = 1 * 2   ---> 1
+1 = 1 * 1   ---> 1
+
+Add up last column:
+0 + 0 + 0 + 0 + 0 + 0 + 2 + 1 = 3 Decimal or 00000011 Binary
+
+Now we know the RIGHT nibble is 3 Decimal or 3 Hexadecimal
+
+Move to the LEFT nibble: 1010
+Convert to decimal  - start at 1s place
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+00001010 <---- mind the zero padding
+
+00001010
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+1 = 1 * 8   ---> 8
+0 = 0 * 4   ---> 0
+1 = 1 * 2   ---> 2
+0 = 0 * 1   ---> 0
+
+Add up last column:
+0 + 0 + 0 + 0 + 8 + 0 + 2 + 0 = 10 Decimal or A Hexadecimal or 10100000 Binary
+
+So this byte: 10100011 == A3 Hexadecimal
+
+# ------------------------------------------------------------------- #
+#                          Hexadecimal to Binary                      #
+# ------------------------------------------------------------------- #
+
+Example 1
+Convert C7 Hexadecimal to Binary
+
+Split C7 in half --> C 7
+
+What is C in Hexadecimal?
+A = 10 , B = 11, C = 12
+
+Now convert 12 to Binary
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+00001100 <---- mind the zero padding
+
+00001100
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+1 = 1 * 8   ---> 8
+1 = 1 * 4   ---> 4
+0 = 0 * 2   ---> 0
+0 = 0 * 1   ---> 0
+
+Add up last column:
+0 + 0 + 0 + 0 + 8 + 4 + 0 + 0 = 12 Decimal or C Hexadecimal or 00001100 Binary
+
+Now take the other half --> 7
+Convert 7 to Binary
+
+Now convert 7 to Binary
++---------128s place
+|+--------64s place
+||+-------32s place
+|||+------16s place
+||||+-----8s places
+|||||+----4s place
+||||||+---2s place
+|||||||+--1s place
+||||||||
+00000111 <---- mind the zero padding
+
+00000111
+0 = 0 * 128 ---> 0
+0 = 0 * 64  ---> 0
+0 = 0 * 32  ---> 0
+0 = 0 * 16  ---> 0
+1 = 1 * 8   ---> 8
+1 = 1 * 4   ---> 4
+0 = 0 * 2   ---> 0
+0 = 0 * 1   ---> 0
+
+Add up last column:
+0 + 0 + 0 + 0 + 0 + 4 + 2 + 1 = 7 Decimal or 7 Hexadecimal or 00000111 Binary
+
+Now combine the two binary nibbles
+
+C --> 00001100 ---> 1100 (Drop the leading/padding zeros)
+7 --> 00000111 ---> 0111 (Drop the leading/padding zeros)
+
+1100 + 0111 = 11000111
+
+So C7 is 11000111 Binary
+
+# ------------------------------------------------------------------- #
+#                       Assigning Bitwise via Code                    #
+#                              Number Bases                           #
+# ------------------------------------------------------------------- #
+
+Decimal     --> 100    (no change)   --> Value is 100 Decimal
+Hexadecimal --> 0x100  (0x to front) --> Value is 256 Decimal
+Binary      --> 0b100  (0b to front) --> Value is   4 Decimal
+
+
+# ------------------------------------------------------------------- #
+#                       Value to String with Code                     #
+# ------------------------------------------------------------------- #
+
+```python
+x = 0b11000101
+
+print(f'Binary Number {bin(x)} is also Decimal Number {int(x)}')
+
+x = 0x11000101 or 0X11000101 (for uppercase)
+
+print(f'Hexadecimal Number {hex(x)} is also Decimal Number {int(x)}')
+
+```
